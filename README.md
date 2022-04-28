@@ -1,2 +1,2 @@
 # Init
-Init project for HIVE Helsinki
+Init -project for HIVE Helsinki
