@@ -1,0 +1,16 @@
+# Identify and display the Ethernet interface characteristics:
+# (a) Identify broadcast address
+# (b) Identify all IP adresses which are part of the same subnet
+#
+# For (a) we need to look at en0 which shows information about the ethernet interface.
+# En1 also has broadcast address but en1 is wireless interface.
+#
+# For (b) we ping the broadcast address twice to find all the ip's connected to the subnet.
+# After that we do some formatting so the output consists only of the ip addresses.
+# The sort command, for example, takes "." as a delimeter and sorts the output first by the
+# 3th column and after that by the 4th. As a result the output is sorted from 1 upwards
+# as opposed to from 10 upwards and then from 1 to 9. The uniq command simply deletes all
+# the dublicates. This step is necessary since we pinged the addresss twice.
+
+ifconfig en0 | grep "broadcast" | cut -d " " -f 6
+ping -c 2 $(ifconfig en0 | grep "broadcast" | cut -d " " -f 6) | grep "bytes from" | cut -d " " -f 4 | sort -t '.' -k3,3n -k4,4n | uniq | cut -d ":" -f 1
