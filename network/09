@@ -1,0 +1,9 @@
+# We can find the IP of 42.fr by simply pingin it. The assignment is probably
+# more challenging if you are working within the 42 network.
+# To make the answer more interesting and to double check we are actually
+# finding out the EXTERNAL IP we can use nslookup and query the 42.fr
+# using googles DNS server (8.8.8.8).
+# The command would be:
+# nslookup 42.fr 8.8.8.8 | grep "Name" -A 1 | grep "Address" | cut -d " " -f 2
+# And the output:
+163.172.250.16
