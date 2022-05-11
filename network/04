@@ -8,5 +8,4 @@
 # showing the Internet6 addresses. Finally we use awk to
 # print the second column of the line which contains the IP
 # of default gateway.
-
 netstat -rn | grep "default" -m 1 | awk '{print $2}'
