@@ -1,0 +1,12 @@
+# Identifiy the default gateway in the routing table
+#
+# We use command netstat with a flag -r to show routes. The flag -n
+# tells the netstat to show the addresses as numbers and not to
+# attempt to display them symbolically.
+# The "-m 1" flag tells grep to stop after finding the first
+# occurence (the default gateway) and thus prevents it from
+# showing the Internet6 addresses. Finally we use awk to
+# print the second column of the line which contains the IP
+# of default gateway.
+
+netstat -rn | grep "default" -m 1 | awk '{print $2}'
