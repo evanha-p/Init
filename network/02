@@ -1,7 +1,3 @@
-# Identify and display the Ethernet interface characteristics:
-# (a) Identify broadcast address
-# (b) Identify all IP adresses which are part of the same subnet
-#
 # For (a) we need to look at en0 which shows information about the ethernet interface.
 # En1 also has broadcast address but en1 is wireless interface.
 #

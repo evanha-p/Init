@@ -1,5 +1,3 @@
-# Get the complete path of the file that contains the IP address of the DNS server you’re using
-#
 # The file can be located in /etc/resolv.conf which has a symbolic link to /var/run/resolv.conf
 # so the answer is /var/run/resolv.conf
 echo /var/run/resolv.conf

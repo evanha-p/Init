@@ -1,7 +1,4 @@
-# Get the list of the network interfaces of the machine without displaying any detail
-# for these interfaces. Only the list of names.
-#
-# Note: I was first going to use the simple command "ifonfig -l" but opted to the solution
+# I was first going to use the simple command "ifonfig -l" but opted to the solution
 # below since it prints one interface on one line and the next one on a new line. The result
 # is easier to read.
 # The output of ifconfig -l would've been something like:

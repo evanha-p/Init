@@ -1,5 +1,3 @@
-# Identifiy the default gateway in the routing table
-#
 # We use command netstat with a flag -r to show routes. The flag -n
 # tells the netstat to show the addresses as numbers and not to
 # attempt to display them symbolically.
