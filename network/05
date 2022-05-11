@@ -1,0 +1,6 @@
+# Identify the IP address of the DNS that responds to the following url: who.int
+#
+# We ping the url who.int with option "-c 1" (so it doesn't continiously ping it)
+# and then use grep and cut to filter out all the unecessary information leaving
+# us only with the IP address of who.int.
+ping -c 1 who.int | grep "who.int" -m 1 | cut -d ")" -f 1 | cut -d "(" -f 2
