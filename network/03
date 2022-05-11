@@ -13,5 +13,4 @@
 # The flag "-A 2" in the first grep tells it to print the line with the word "Wi-Fi"
 # AND two lines after that. The second grip and cut are used to filter out all
 # the unecessary stuff so we are left only with the MAC address.
-
 networksetup -listallhardwareports | grep "Wi-Fi" -A 2 | grep "Ethernet" | cut -d " " -f 3

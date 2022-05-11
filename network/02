@@ -12,6 +12,5 @@
 # as opposed to from 10 upwards and then from 1 to 9 (this would be the result if sort was
 # used without the options). The uniq command simply deletes all the dublicates.
 # This step is necessary since we pinged the addresss twice.
-
 ifconfig en0 | grep "broadcast" | cut -d " " -f 6
 ping -c 2 $(ifconfig en0 | grep "broadcast" | cut -d " " -f 6) | grep "bytes from" | cut -d " " -f 4 | sort -t '.' -k3,3n -k4,4n | uniq | cut -d ":" -f 1
