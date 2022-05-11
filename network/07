@@ -1,2 +1,2 @@
-# For this we used command nslookup. Command host could've also been used fro example.
+# For this we used command nslookup. Command "host" could've also been used for example.
 nslookup who.int 8.8.8.8
