@@ -1,0 +1,8 @@
+# For this we can use command whois. If we give a command whois who.int we can see that the
+# domain is owned by the World Health Organization. This however doesn't tell us
+# who is the provider for who.int.
+#
+# To find out the provider of the domain we need the IP address which we can find out
+# by pinging the who.int (or by using nslookup etc.). After we have the IP we can
+# find out the provider with this command:
+whois 104.17.113.188 | grep "OrgName" | awk '{print $2,$3}'
