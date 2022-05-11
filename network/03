@@ -1,0 +1,17 @@
+# Identify the MAC address of the Wi-Fi card
+#
+# Originally I planned on using command:
+# ifconfig | grep -A 1 "en1" | grep "ether" | cut -d " " -f 2
+# However this solution relies on the fact that the computer
+# has ethernet and wireless interfaces. In this case
+# en0 would be ethernet and en1 would be wireless.
+# However if we have only the wireless interface it would be named as en0
+# and the command above would not work.
+# For this reason and ended up switching to the solution below.
+#
+# The flag in networksetup displays all the ports with device name and ethernet adress.
+# The flag "-A 2" in the first grep tells it to print the line with the word "Wi-Fi"
+# AND two lines after that. The second grip and cut are used to filter out all
+# the unecessary stuff so we are left only with the MAC address.
+
+networksetup -listallhardwareports | grep "Wi-Fi" -A 2 | grep "Ethernet" | cut -d " " -f 3
