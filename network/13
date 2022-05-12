@@ -1,0 +1,7 @@
+# We can find the name of the host by using nslookup with the IP adress.
+# The command needed would be:
+# nslookup $(ipconfig getpacket en0 | grep "yiaddr" | cut -d " " -f 3) |\
+# grep "name" | awk '{print $4}'
+# 
+# And the output:
+c2r6p5.hive.fi.
