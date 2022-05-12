@@ -1,0 +1,7 @@
+# To find out the IP assigned by DHCP server we can use ipconfig.
+# The option getpacket prints out the packet received from DHCP server.
+# Then we only need to specify which interfaces information we need,
+# in this case it would be en0.
+#
+# After that we modify the output so we are left with only the IP adress.
+ipconfig getpacket en0 | grep "yiaddr" | cut -d " " -f 3
