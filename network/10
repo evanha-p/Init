@@ -1,0 +1,8 @@
+# Besides the answer below command ping with flag "-R" could've been used. At least
+# in theory. If you read the manual concerning the flag -R it says that many hosts
+# ignore or discard the option. I tested the command and got request timeout as a
+# result so it seem that who.int ignores the ping -R command.
+# 
+# So to put it shortly the command used to identify devices between the computer
+# and the domain is:
+traceroute who.int
