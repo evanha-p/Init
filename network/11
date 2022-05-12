@@ -1,0 +1,11 @@
+# I used whois command to find out the providers of the IP addresses printed out
+# by traceroute. The first IP that was not reserved for private use (ie. local
+# networks and such) was the third hop to IP 194.136.126.33 (provided by Elisa Oyj).
+# Based on this the previous step, named "nat", must be the link between local network and
+# outside world.
+#
+# After googling I learned that NAT stands for Network Address Translator and
+# its job is to translate the IP addresses of computers in a local network
+# to a single IP address. So nat is the device that makes the link between
+# our local network and the outside world.
+traceroute who.int | grep "nat" | awk '{print $2, $3}'
