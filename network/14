@@ -1,0 +1,4 @@
+# The local DNS entries are located in /etc/hosts. We can use command cat to see
+# what the file hosts contain and verify that it indeed contains the local DNS
+# entries.
+/etc/hosts
