@@ -1,0 +1,4 @@
+# Hosts file can be modified only by admin. If we did have those rights we could modify
+# the file with sudo vim /etc/hosts. Then we would just need to add line:
+# "46.19.122.85 intra.42.fr" to the file.
+sudo vim /etc/hosts and after that add line "46.19.122.85 intra.42.fr" to the file
