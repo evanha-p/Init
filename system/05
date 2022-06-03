@@ -1,0 +1,8 @@
+# Once again there are several ways to find the state of SSH service.
+# If you don't have sudo rights you can run command:
+# systemctl status ssh
+# However you can't see the logs without sudo. To see logs you would need
+# the sudo rights and the command would be:
+# sudo systemctl status ssh.
+# Another option (which also requires sudo rights) would be:
+sudo service ssh status
