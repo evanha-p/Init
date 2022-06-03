@@ -1,0 +1,14 @@
+# There are several ways to find out who are connected to the system.
+# Using command w you can get most detailed information about the users
+# connected to the system (from where they are logged in, login time, what
+# they are doing e.g.)
+#
+# Command who also displays additional information but less that command w. With
+# who you can see who is connected, from where and the login time. Who command
+# shows login time and date where as w only shows login time.
+#
+# Since we only want to find out who are connected we can use command users, 
+# which shows the connected users without any extra information besides
+# their logins in a nice sorted order
+# (but sadly in a single line (I prefer lists)).
+users
