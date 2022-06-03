@@ -1,0 +1,10 @@
+# Easiest way (in my opinion) is to use command sudo service ssh status
+# and filter out any uneccesary information with grep and cut.
+#
+# Other option would've been using ps aux command which lists all processes.
+# I decided not to use it since it also shows other ssh related processes
+# besides the SSHD service such as active connections thus creating a chance
+# to mix up PID of such process to the PID of SSHD service.
+#
+# Yet again you need sudo rights to do this.
+sudo service sshd status | grep PID | cut -d " " -f 6
