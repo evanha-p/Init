@@ -1,0 +1,3 @@
+# We have several options here but I think the command below gives the
+# cleanest output.
+uptime -s
