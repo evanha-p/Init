@@ -1,0 +1,8 @@
+# I started looking from directory "etc" since it usually contains such
+# information so I found the file quickly. The file is /etc/debian_version.
+# 
+# You could've found the same information and some extra information
+# with a command hostnamectl. However the installed version is
+# specified as "Debian GNU/Linux 11 (bullseye) where as in file debian_version
+# it is 11.3 so the information in /etc/debian_version is more specific.
+/etc/debian_version
