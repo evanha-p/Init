@@ -1,0 +1,15 @@
+# There are two files that keep track of the hostname (at least to my knowledge).
+# /etc/hostname and /etc/hosts. The file /etc/hostname is modified when giving
+# command sudo hostnamectl set-hostname. However the /etc/hosts is not.
+# 
+# To make changes permament you have to edit /etc/hosts file (with sudo) and
+# replace all references to the old hostname with the newone.
+#
+# ATTENTION! These lines should NOT be modified:
+# 127.0.0.1	localhost
+#
+# The following lines are desirable for IPv6 capable hosts
+# ::1     localhost ip6-localhost ip6-loopback
+# ff02::1 ip6-allnodes
+# ff02::2 ip6-allrouters
+/etc/hosts

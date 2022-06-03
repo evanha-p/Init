@@ -10,3 +10,7 @@
 # 5. logout
 # Now you are ready. Just log in as the user you just created.
 sudo hostnamectl set-hostname NEW_NAME_HERE
+
+# The other option would be using command below. However this change is
+# not permament
+sudo hostname NEW_NAME_HERE
