@@ -1,0 +1,3 @@
+# The command for restarting the SSH service is quite similar to checking
+# the status. Once again you need sudo rights to do this.
+sudo service ssh restart
