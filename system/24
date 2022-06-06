@@ -1,0 +1,7 @@
+# I'm assuming the assignment asks to list all INSTALLED packages even though
+# they ask to list "all packages". If you wanted to do that the command
+# would be (you need sudo rights):
+# sudo apt list
+#
+# However if you wanted to list all installed packages the command is:
+sudo apt list --installed
