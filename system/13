@@ -1,0 +1,3 @@
+# To see a list of processes in real time we can use command top.
+# You can exit top by pressing q, press h for help.
+top
