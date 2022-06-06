@@ -1,0 +1,23 @@
+# I used this since typing directly to Virtualbox was terrible due to its
+# lagginess. With the command I was able to give commands to the VM from
+# a terminal running outside of the VM.
+#
+# I created a static IP in Debian to which I can connect. I also changed
+# the default port from 22 to 50000. This way I was able to prevent others
+# in the same network from randomly connecting to my VM. Chaning the port
+# served the same function.
+#
+# To connect to the VM I would use command:
+# ssh -p 50000 evanha-p@192.168.56.2
+# With flag -p I can specify the port, without the flag it would try to
+# connect to the default port 22. "evanha-p" is the name of the user I
+# created to my VM Debian. The IP address is the static address I setup
+# manually.
+#
+# About the IP:
+# The setup uses IP addresses 192.168.56.1 and 192.168.56.2.
+# VM Debian uses IP 192.168.56.1 to connect to the graphic session (MacOS)
+# through which it can connect to the internet.
+# The IP 192.168.56.2 is solely used to connect to the VM Debian from the
+# graphic session (again the MacOS).
+ssh -p PORT_HERE USERNAME_HERE@IP_OF_YOUR_VM_HERE
