@@ -1,0 +1,10 @@
+# This depends on how we define "real users". I'm assuming this refers to
+# all human users.
+#
+# All human users have home directory so we use this to our advantage.
+# The command:
+# cat /etc/passwd | grep "home" | cut -d ':' -f 1
+# /etc/passwd contains all the users. We use grep to only include
+# all human users. Then we use cut to only list the usernames and no additional
+# information.
+cat /etc/passwd | grep "home" | cut -d ':' -f 1
