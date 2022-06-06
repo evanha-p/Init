@@ -1,2 +1,2 @@
-# To run a program in the background you add "&" at the end of the command.
+# To run a process in the background you add "&" at the end of the command.
 tail -f /var/log/syslog &
