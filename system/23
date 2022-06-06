@@ -1,0 +1,31 @@
+# First we need to create a new user. The stepts are:
+# 1. Login as root or as a user with sudo rights
+# 2. Type sudo adduser NEW_USERNAME_HERE
+# 3. give password to the user
+# 4. give it again
+# 5. enter additional information if needed (name, room number, work phone,
+# home phone, other)
+# 6. Verify if the information is correct (type y if it is, n if it is not).
+# 7. Type logout
+#
+# For graphic/console session you can now simply login by giving the new
+# username and the password.
+#
+# For the ssh login it depends if you have to setup ssh key authentication.
+# If you do, the steps are as follows. Note: these steps are done on the
+# session you want to connect from! Everything in caps should be replaced with
+# correct information:
+# 1. type ssh-keygen -t rsa
+# 2. type:
+# ssh-copy-id -i THE_KEY_WITH_PATH YOUR_USER_NAME@THE_IP_ADDRESS_OF_THE_SERVER
+# Note: you must give the .pub key. The other one is private and should not be
+# shared. Example for the "THE_KEY_WITH_PATH" part:
+# ~/.ssh/id_rsa.pub
+# 3. Type your password for the username on the server
+# 4. Now you can login. Type:
+# ssh -p THE_PORT_THE_SERVER_IS_USING USERNAME@SERVER_IP_ADDRESS
+# In my case I would login by typing:
+# ssh -p 50000 evanha-p@192.168.56.2
+# 5. you should be now connected!
+#
+# If you don't have to setup the key you can skip steps 1-3.
