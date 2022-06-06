@@ -1,0 +1,7 @@
+# I decided to use command "compgen" which is a handy command that lists
+# several things. For example if you've ever wondered what are all the
+# command you could run command "compgen -c" will tell you that.
+#
+# For this exercise we will use command "compgen -u" which lists all the
+# users (only the usernames).
+compgen -u
