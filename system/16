@@ -1,0 +1,3 @@
+# To run scheduled tasks you use cron. The information is stored in cron file
+# and can be edited with a command crontab (stand for cron table).
+cron
