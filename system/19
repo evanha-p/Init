@@ -1,0 +1,15 @@
+# We can use command "systemctl list-unit-files" to achieve this.
+# We do need to filter out the results so we see only the services
+# that are started on boot time. All such services are on state "enabled".
+# Other possible states are disabled and static.
+#
+#Yet again you need sudo rights to this.
+#
+# The command would be:
+# sudo systemctl list-unit-files --type=service --state=enabled -all
+# 
+# List-unit-files asks to, well, list all unit files. Then we specify that they
+# need to be of type "service" and their state has to be enabled.
+# By default systemctl lists only active, pending or failed units so lastly we
+# use the flag -all to make sure all the services are listed.
+sudo systemctl list-unit-files --type=servcice --state=enabled -all
