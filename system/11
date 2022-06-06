@@ -1,0 +1,5 @@
+# We use command "df -h" to achieve this. Df without the flag -h displays
+# the used and free space in 1 kilobyte blocks.
+# The flag -h (which is short from --human-readable) makes the values
+# easier to understand to us.
+df -h
