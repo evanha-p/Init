@@ -1,0 +1,3 @@
+# We can use multiple commands to achieve this e.g. sercive and systemctl.
+# Both of them need sudo rights.
+sudo service ssh stop
