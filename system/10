@@ -1,0 +1,15 @@
+# I chose to use command fdisk -l. Other option I considered was lsblk
+# but chose not to since it lists all block devices such as CDs and such.
+#
+# After using fdisk I pipe it to sed to make the output cleaner.
+# Using sed we prevent it from printing anything before a matching patter of
+# our choice so we only get the list of partition tables.
+#
+# Sed syntax explained: "-n" prevents sed from printing by default,
+# /Device/ specifies the pattern (in this case the word "Device") and
+# "p" tells sed to print from the first line matching the pattern and
+#  "$" tells it to print everything until the end of the file.
+#
+#  Yet again you need the sudo rights to do this. Lsblk doesn't need sudo
+#  rights so lsblk is prefered if user doesn't have sudo rights.
+sudo fdisk -l | sed -n '/Device/,$p'
