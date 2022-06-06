@@ -1,0 +1,10 @@
+# To kill a process running in the backround we can use either command
+# pkill or kill with "-9". -9 will force terminate the process.
+#
+# We need to specify a process name for pkill to know which process to
+# terminta. Kill command takes a process ID so you need to watch for typos
+# so you don't accidentally kill a wrong process.
+#
+# We will use kill because we like to live dangerously (and because I haven't
+# figured out how to kill a process with a space in the name with pkill).
+kill -9 PROCESS_ID_HERE
