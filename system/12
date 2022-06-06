@@ -1,0 +1,11 @@
+# We can use command "du" which displays the file space usage of a certain
+# file and the path.
+#
+# We ask "du" to look at all the folders in /var and use flags -h and -s.
+# -h makes the output human-readable and the -s summarizes the results.
+# Without the flag -s the output would list all the directories in /var
+# with all of their contents.
+#
+# Finally we use sudo so we don't have issues with files we don't have
+# access to without the sudo.
+sudo du -hs /var/*
