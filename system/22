@@ -1,0 +1,7 @@
+# To add a new user you need sudo rights. The command to add a new user is
+# adduser.
+#
+# After the command you are prompted to create a password for the user and
+# after that you can give some additional information. Finally you are
+# asked, if all the information is correct.
+sudo adduser USERNAME_HERE
