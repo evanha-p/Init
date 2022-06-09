@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Even though the assingment didn't ask for it I decided to add an prompt
-# that asks, whether the user wants to display the logins, UID and path.
+# that asks, whether the user wants to display the logins, UID and path or not.
 # 
 # I use case to check for the answer. I decided to use case because it was
 # the easiest way (in my opinion) to make the needed answer not case specific.
