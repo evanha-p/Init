@@ -1,0 +1,65 @@
+#! /bin/bash
+
+# Even though the assingment didn't ask for it I decided to add an prompt
+# that asks, whether the user wants to display the logins, UID and path.
+# 
+# I use case to check for the answer. I decided to use case because it was
+# the easiest way (in my opinion) to make the needed answer not case specific.
+# If the answer is not yes/no the user is prompted to answer correctly and
+# asked again. There is also an "easter egg" if wrong answer is given more
+# than three times.
+#
+# If user answers no, the script exits.
+# 
+# If answered yes we first print some info and then the logins, UID and path.
+# I use grep with flag -v to ditch all the possible comment lines in /etc/passwd.
+# Then I use awk to print what we need. I used awks search feature to filter out
+# users and human users and highlighted human users with purple so they are
+# easier to spot.
+#
+# Lastly we use command "column -t" to create a nice table.
+
+COUNTER=0
+
+while read -p "Display users with their login, UID and path? (y/n) " ANSWER
+do
+	case "$ANSWER" in
+		[yY] | [yY][eE][sS])
+			ANSWER="yes"
+		;;
+		[nN] | [nN][oO])
+			ANSWER="no"
+			;;
+		*)
+			ANSWER="error"
+			;;
+	esac
+	if [ "$ANSWER" == "yes" ]
+	then
+		echo -e "\033[0;32m----------------------------------------"
+		echo -e "\033[0mHuman users highlighted in \033[1;35mpurple"
+		echo -e "\033[0;32m----------------------------------------"
+		cat /etc/passwd | grep -v "#" | awk -F ":" '!/home/ \
+			{print "\033[1;37m" $1, "\033[0m" $3, $7}\
+			/home/ {print "\033[1;35m" $1, "\033[0m" $3, $7}' | column -t
+		break
+	elif [ "$ANSWER" == "no" ]
+	then
+		echo -e "Oh ok, I guess I did color coding for \033[1;31mNOTHING!"
+		break
+	elif [ "$ANSWER" == "error" ]
+	then
+		((COUNTER++))
+		if [ $COUNTER -eq 4 ]
+		then
+			touch please_read
+			echo "Hi, my name is $USER and I can't answer to a simple question" \
+				>> please_read
+			echo "Created a file \"please_read\"."
+			echo "Read through it and try again."
+			break
+		fi
+		echo -e "Please type y/n or yes/no. \033[4;37mNo shenanigans.\033[0m"
+		continue
+	fi
+done
