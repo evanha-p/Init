@@ -1,0 +1,144 @@
+#!/bin/bash
+
+# Variables
+
+CLOSE=1
+SCORE=0
+
+# Colors
+
+GREEN="\033[0;32m"
+RED="\033[0;31m"
+PURPLE="\033[1;35m"
+WHITE="\033[1;37m"
+COL_OFF="\033[0m"
+
+# Printing functions
+
+function print_rock()
+{
+	echo "    _______"
+	echo "---/  _____)"
+	echo "     (_____)"
+	echo "     (_____)"
+	echo "     (_____)"
+	echo "---.__(___)"
+}
+
+function print_paper()
+{
+	echo "    _______"
+	echo "---/   ____)______"
+	echo "           _______)"
+	echo "           ________)"
+	echo "           _______)"
+	echo "---.____________)"
+}
+
+function print_scissors()
+{
+	echo "    _______"
+	echo "---/   ____)______"
+	echo "           _______)"
+	echo "       ____________)"
+	echo "      (____)"
+	echo "---.__(___)"
+}
+
+function print_rock_mirror()
+{
+	echo " _______    "
+	echo "(_____  '---"
+	echo "(_____)     "
+	echo "(_____)     "
+	echo "(_____)     "
+	echo " (___)__/---"
+}
+
+function print_paper_mirror()
+{
+	echo "         _______    "
+	echo "  ______(____   '---"
+	echo " (_______           "
+	echo "(________           "
+	echo " (_______           "
+	echo "  (_____________.---"
+}
+
+function print_scissors_mirror()
+{
+	echo "         _______    "
+	echo "  ______(____   '---"
+	echo " (_______           "
+	echo "(____________       "
+	echo "        (____)      "
+	echo "         (___)__.---"
+}
+
+function play_game()
+{
+	while read -rsn1 WEAPON
+	do
+		clear
+		echo -e "${PURPLE}Your score: ${COL_OFF}${SCORE}"
+		echo ""
+		echo ""
+		echo "Choose your weapon:"
+		echo "A) Rock"
+		echo "B) Paper"
+		echo "C) Scissors"
+		echo "Press anything else to exit"
+		if [ "${WEAPON}" == "a" ]
+		then
+			chose_rock
+		elif [ "${WEAPON}" == "b" ]
+		then
+			chose_paper
+		elif [ "${WEAPON}" == "c" ]
+		then
+			chose_scissors
+		else
+			break
+		fi
+	done
+}
+
+while [ "${CLOSE}" == 1 ]
+do
+	clear
+	echo "ROCK, PAPER, SCISSORS"
+	echo "---------------------"
+	echo "       the game      "
+	if ! test -f "high_score";
+	then
+		touch high_score
+	fi
+	if ! test -f "player";
+	then
+		touch player
+	fi
+	echo ""
+	echo -ne "${PURPLE}High score: ${COL_OFF}"
+	cat high_score
+	echo -ne "${PURPLE}By: ${COL_OFF}"
+	cat player
+	echo -e "${COL_OFF}"
+	echo -e "${WHITE}A)${COL_OFF} Start"
+	echo -e "${WHITE}B)${COL_OFF} Exit"
+	while read -rsn1 ANSWER
+	do
+		if [ "${ANSWER}" == "a" ]
+		then
+			play_game
+			break
+		elif [ "${ANSWER}" == "b" ]
+		then
+			CLOSE=0
+			break
+		else
+			echo "Incorrect answer, type a or b"
+			continue
+		fi
+	done
+done
+echo "Thank you for playing!"
