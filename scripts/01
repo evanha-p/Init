@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # Even though the assingment didn't ask for it I decided to add an prompt
 # that asks, whether the user wants to display the logins, UID and path or not.
