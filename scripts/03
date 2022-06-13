@@ -4,6 +4,11 @@
 
 CLOSE=1
 SCORE=0
+WEAPON=0
+COMPUTER_WEAPON=0
+ROCK=1
+PAPER=2
+SCISSORS=3
 
 # Colors
 
@@ -90,16 +95,18 @@ function play_game()
 		echo "Press anything else to exit"
 		if [ "${WEAPON}" == "a" ]
 		then
-			chose_rock
+			WEAPON=${ROCK}
 		elif [ "${WEAPON}" == "b" ]
 		then
-			chose_paper
+			WEAPON=${PAPER}
 		elif [ "${WEAPON}" == "c" ]
 		then
-			chose_scissors
+			WEAPON=${SCISSORS}
 		else
+			WEAPON=0
 			break
 		fi
+		COMPUTER_WEAPON=shuf -i 1-3 -n 1
 	done
 }
 
