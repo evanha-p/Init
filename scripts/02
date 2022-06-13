@@ -1,0 +1,267 @@
+#!/bin/bash
+
+# I could've made the script nice and simple but decided to try to implement
+# a menu of sorts hence the long script. Details for each function and step
+# provided below.
+
+# Colors and variables used in the script
+# Variable "CLOSE" is used in deciding wether to exit the script or not
+
+CLOSE=1
+RED="\033[0;31m"
+RED_BOLD="\033[1;31m"
+WHITE_BOLD="\033[1;37m"
+COL_OFF="\033[0m"
+
+# Created to save some space.
+# Prints an empty line, a red line and an empty line
+
+function print_line()
+{
+	echo ""
+	echo -e "${RED}____________________________${COL_OFF}"
+	echo ""
+}
+
+# Called in the beginning of the script to create a "fancy" animation
+# the flag -e allows us to specify a color etc., the flag -n tells
+# echo to print on the same line.
+
+function animate_title()
+{
+	print_line
+	echo -ne "${RED_BOLD} U${COL_OFF}"
+	sleep 0.2
+	echo -ne "${RED_BOLD} S${COL_OFF}"
+	sleep 0.2
+	echo -ne "${RED_BOLD} E${COL_OFF}"
+	sleep 0.2
+	echo -ne "${RED_BOLD} R${COL_OFF}"
+	sleep 0.2
+	echo -ne "${RED_BOLD} P${COL_OFF}"
+	sleep 0.2
+	echo -ne "${RED_BOLD} U${COL_OFF}"
+	sleep 0.2
+	echo -ne "${RED_BOLD} R${COL_OFF}"
+	sleep 0.2
+	echo -ne "${RED_BOLD} G${COL_OFF}"
+	sleep 0.2
+	echo -ne "${RED_BOLD} E${COL_OFF}"
+	sleep 0.2
+	echo -ne "${RED_BOLD} R${COL_OFF}"
+	sleep 0.2
+	echo -ne "${RED_BOLD}  1${COL_OFF}"
+	sleep 0.2
+	echo -ne "${RED_BOLD} .${COL_OFF}"
+	sleep 0.2
+	echo -ne "${RED_BOLD} 0${COL_OFF}"
+	sleep 0.2
+	print_line
+	echo ""
+}
+
+# Like the function "print_line" this was created to save space.
+# Like the name succests the function prints the title of the script.
+
+function print_title()
+{
+	echo ""
+	echo ""
+	print_line
+	echo -e "${RED_BOLD} U S E R P U R G E R  1 . 0${COL_OFF}"
+	echo -e "${RED_BOLD}____________________________${COL_OFF}"
+	echo ""
+	echo ""
+}
+
+# This function is called if the user wants to only delete the user
+# and possibly delete the files too.
+# We use read -p to get the username we want to delete
+# and read -rsn1 to get the answer to the a/b/e question.
+#
+# The flag -rsn1 makes it so that the answer is not printed
+# out "1" tells the read to expect a one character long answer.
+# r: do not allow backslashes to escape any characters
+# s: don't echo the input coming from terminal
+# n: return after reading a number of chars (in our case 1)
+#	 rather than waiting for a newline
+#
+# I chose to use while loop. We stay in the loop until one of the
+# correct options is given.
+#
+# Since we don't kill users processes we have to use flag -f
+# in userdel to force the deletion. The flag -f forces the
+# deletion even if the user is logged in and/or has running
+# processes. THE PROCESSES ARE NOT KILLED!
+# 
+# In case the user wants to also delete the users files
+# we use the flag -r which deletes the users home and
+# mail spool
+
+function just_delete()
+{
+	echo "A) Delete an user"
+	echo ""
+	read -p "Give the username to be deleted: " USER2DEL
+	clear
+	print_title
+	echo -e "${WHITE_BOLD}Delete ${USER2DEL}s files?${COL_OFF}"
+	echo "A) YES"
+	echo "B) NO"
+	echo "E) EXIT"
+	while read -rsn1 ANSWER_JD
+	do
+		clear
+		print_title
+		if [ "${ANSWER_JD}" == "a" ]
+		then
+			sudo userdel -rf "${USER2DEL}"
+			echo "Deleted ${USER2DEL} and ${USER2DEL}s files."
+			break
+		elif [ "${ANSWER_JD}" == "b" ]
+		then
+			sudo userdel -f "${USER2DEL}"
+			echo "Deleted ${USER2DEL}."
+			break
+		elif [ "${ANSWER_JD}" == "e" ]
+		then
+			break
+		else
+			echo "Incorrect answer"
+			echo ""
+			echo -e "${WHITE_BOLD}Delete ${USER2DEL}s files?${COL_OFF}"	
+			echo "A) YES"
+			echo "B) NO"
+			echo "E) EXIT"
+			continue
+		fi
+	done
+}
+
+# Works very similarly to the function "just_delete" except we
+# logout the user and kill the users processes with
+# pkill -9 -u USERNAMEHERE.
+# Since we have done that we don't need the flag -f with userdel.
+
+function kill_and_delete()
+{
+	echo "B) Delete an user and kill users processes"
+	echo ""
+	read -p "Give the username to be deleted: " USER2DEL
+	clear
+	print_title
+	echo -e "${WHITE_BOLD}Delete ${USER2DEL}s files?${COL_OFF}"
+	echo "A) YES"
+	echo "B) NO"
+	echo "E) EXIT"
+	while read -rsn1 ANSWER_KD
+	do
+		clear
+		print_title
+		if [ "${ANSWER_KD}" == "a" ]
+		then
+			sudo pkill -9 -u "${USER2DEL}"
+			sudo userdel -r "${USER2DEL}"
+			echo "Deleted ${USER2DEL} and ${USER2DEL}s files."
+			echo "Logget out ${USER2DEL} and killed all processes"
+			break
+		elif [ "${ANSWER_KD}" == "b" ]
+		then
+			sudo pkill -9 -u "${USER2DEL}"
+			sudo userdel "${USER2DEL}"
+			echo "Deleted ${USER2DEL}"
+			echo "Logged out ${USER2EL} and killed all processes"
+			break
+		elif [ "${ANSWER_KD}" == "e" ]
+		then
+			break
+		else
+			echo "Incorrect answer"
+			echo ""
+			echo -e "${WHTE_BOLD}Delete ${USER2DEL}s files?${COL_OFF}"
+			echo "A) YES"
+			echo "B) NO"
+			echo "E) EXIT"
+			continue
+		fi
+	done
+}
+
+# Simple function to double check if the user wants to exit the
+# script or not. Sets the value of variable "CLOSE" to 1 or 0
+# depending on the answer.
+
+function close_or_not()
+{
+	echo ""
+	echo -e "${WHITE_BOLD}Are you done?${COL_OFF}"
+	echo "A) Yes, exit"
+	echo "B) No"
+	while read -rsn1 ANSWER
+	do
+		if [ "${ANSWER}" == "a" ]
+		then
+			CLOSE=0
+			break
+		elif [ "${ANSWER}" == "b" ]
+		then
+			CLOSE=1
+			clear
+			print_title
+			break
+		else
+			echo "Incorrect answer. Choose A or B."
+			continue
+		fi
+	done
+}
+
+# The main menu
+#
+# This is the main menu that calls other functions.
+# I used while loop inside of while loop
+# so the script keeps running until the user chooses
+# one of the correct answers.
+#
+# After that we break out of the inner while loop
+# and go to function "close_or_not".
+# If the user wants to exit the script the variable
+# "CLOSE" is switched from 1 to 0 and we exit the
+# outer while loop
+
+clear
+echo ""
+echo -e "${WHITE_BOLD}         WELCOME TO${COL_OFF}"
+animate_title
+while [ "${CLOSE}" == 1 ]
+do
+	echo -e "${WHITE_BOLD}Please choose an option:${COL_OFF}"
+	echo "A) Delete an user"
+	echo "B) Log out & delete an user"
+	echo "   and kill users processes"
+	echo "E) EXIT"
+	while read -rsn1 ANSWER
+	do
+		if [ "${ANSWER}" == "a" ]
+		then
+			clear
+			print_title
+			just_delete
+			break
+		elif [ "${ANSWER}" == "b" ]
+		then
+			clear
+			print_title
+			kill_and_delete
+			break
+		elif [ "${ANSWER}" == "e" ]
+		then
+			break
+		else
+			echo "Incorrect answer"
+			continue
+		fi
+	done
+	close_or_not
+done
+echo "Closing Userpurger 1.0"
