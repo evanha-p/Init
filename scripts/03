@@ -1,6 +1,13 @@
 #!/bin/bash
 
 # Variables
+#
+# Answer = stores the users answer in the main menu.
+# Close = used when deciding whether to exit the script or not.
+# Score = stores the amount of point the player has
+# Weapon = stores the weapon user decided to use (rock/paper/scissors)
+# Comp_w = stores the weapon for computer (generated with shuf)
+# Rock/paper/scissor = variables created to make the code easier to understand
 
 ANSWER=0
 CLOSE=1
@@ -12,6 +19,8 @@ PAPER=2
 SCISSORS=3
 
 # Colors
+# Green and red are "normal" and purple and white are bold characters.
+# Col_off is used to turn colors off.
 
 GREEN="\033[0;32m"
 RED="\033[0;31m"
@@ -20,6 +29,12 @@ WHITE="\033[1;37m"
 COL_OFF="\033[0m"
 
 # Printing functions
+# The first six functions are used to print rock, paper or scissors
+# on the terminal. I chose to have the computers decision facing
+# the other way compared to the user.
+#
+# The last two printing functions print out some aspects of the menu.
+# They were created to save space and make the code easier to read.
 
 function print_rock()
 {
@@ -107,6 +122,29 @@ function print_results()
 	fi
 }
 
+function print_game_menu()
+{
+	echo -e "${PURPLE}Your score: ${COL_OFF}${SCORE}"
+	echo ""
+	echo ""
+	echo -e "${WHITE}Choose your weapon:"
+	echo -e "${WHITE}A)${COL_OFF} Rock"
+	echo -e "${WHITE}B)${COL_OFF} Paper"
+	echo -e "${WHITE}C)${COL_OFF} Scissors"
+	echo "Press anything else to exit"
+}
+
+# These functions mostly decide what is printed on the screen depending
+# whether the player looses or wins or if the result is a tie.
+# However if the player wins several things happen:
+#
+# We increase the score by on and check if the score is higher than the
+# curren high score. If it is we delete the files containing the now old
+# high score and the name of the player who made it.
+# After deletion create the files again and echo the new high score to the
+# file high score. Lastly we ask for the players name and store it in the
+# file player in the same way we stored the high score.
+
 function player_lost()
 {
 	print_results
@@ -138,17 +176,25 @@ function player_win()
 	read -p "Press ENTER to continue"
 }
 
-function print_game_menu()
-{
-	echo -e "${PURPLE}Your score: ${COL_OFF}${SCORE}"
-	echo ""
-	echo ""
-	echo -e "${WHITE}Choose your weapon:"
-	echo -e "${WHITE}A)${COL_OFF} Rock"
-	echo -e "${WHITE}B)${COL_OFF} Paper"
-	echo -e "${WHITE}C)${COL_OFF} Scissors"
-	echo "Press anything else to exit"
-}
+# This function handles the menu, checks what the user chose
+# and creates a random "weapon" for the computer using shuf.
+# 
+# We then check if the player won, lost or tied with the computer.
+# Since we have determined that:
+# Rock = 1
+# Paper = 2
+# Scissors = 3
+# We can see that every "weapon" looses to the one which is one unit greater
+# than the weapon. Rock is 1 and looses to paper, which is 2 for example.
+# The only exception is scissors which looses to rock which is 2 units smaller
+# than scissors.
+#
+# So player looses if the weapon chosen + 1 equals to the weapon
+# the computer got. Or if in case of scissors weapon chosen - 2 equals to
+# what the computer got.
+# 
+# If the player and computer got the same result it is a tie.
+# If neither of those conditions are met we know that the player won.
 
 function play_game()
 {
@@ -184,6 +230,16 @@ function play_game()
 		print_game_menu
 	done
 }
+
+# The main "function" that calls the others.
+# We also check if we have the files highs_score and player
+# created. If we don't we create them. The files are 
+# used in storing the high_score and the player so that
+# information isn't lost even when exiting the script.
+#
+# When we create the file high_score we need to echo 0
+# in to it so the script can compare the users
+# score to it.
 
 while [ "${CLOSE}" == 1 ]
 do
