@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# We were tasked to create a script of our choice.
+# I decided to create a rock,paper&scissors game in bash script.
+# It might not be very useful but it is fun.
+#
 # Variables
 #
 # Answer = stores the users answer in the main menu.
