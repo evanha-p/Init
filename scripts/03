@@ -2,10 +2,11 @@
 
 # Variables
 
+ANSWER=0
 CLOSE=1
 SCORE=0
 WEAPON=0
-COMPUTER_WEAPON=0
+COMP_W=0
 ROCK=1
 PAPER=2
 SCISSORS=3
@@ -80,19 +81,81 @@ function print_scissors_mirror()
 	echo "         (___)__.---"
 }
 
+function print_results()
+{
+	if [ ${WEAPON} == ${ROCK} ]
+	then
+		print_rock
+	elif [ ${WEAPON} == ${PAPER} ]
+	then
+		print_paper
+	else
+		print_scissors
+	fi
+	echo ""
+	echo -e "${WHITE}	VS${COL_OFF}"
+	echo ""
+	sleep 2
+	if [ ${COMP_W} == ${ROCK} ]
+	then
+		print_rock_mirror
+	elif [ ${COMP_W} == ${PAPER} ]
+	then
+		print_paper_mirror
+	else
+		print_scissors_mirror
+	fi
+}
+
+function player_lost()
+{
+	print_results
+	echo -e "${RED}YOU LOST! :(${COL_OFF}"
+	read -p "Press ENTER to exit"
+}
+
+function player_tie()
+{
+	print_results
+	echo "IT'S A TIE!"
+	read -p "Press ENTER to continue"
+}
+
+function player_win()
+{
+	print_results
+	echo -e "${GREEN}YOU WON!${COL_OFF}"
+	((SCORE++))
+	if [ ${SCORE} -gt ${HIGH_SCORE} ]
+	then
+		echo -e "${WHITE}NEW HIGH SCORE!${COL_OFF}"
+		rm high_score player
+		touch high_score player
+		echo ${SCORE} >> high_score
+		read -p "Give your name: " NAME
+		echo ${NAME} >> player
+	fi
+	read -p "Press ENTER to continue"
+}
+
+function print_game_menu()
+{
+	echo -e "${PURPLE}Your score: ${COL_OFF}${SCORE}"
+	echo ""
+	echo ""
+	echo -e "${WHITE}Choose your weapon:"
+	echo -e "${WHITE}A)${COL_OFF} Rock"
+	echo -e "${WHITE}B)${COL_OFF} Paper"
+	echo -e "${WHITE}C)${COL_OFF} Scissors"
+	echo "Press anything else to exit"
+}
+
 function play_game()
 {
+	clear
+	print_game_menu
 	while read -rsn1 WEAPON
 	do
-		clear
-		echo -e "${PURPLE}Your score: ${COL_OFF}${SCORE}"
-		echo ""
-		echo ""
-		echo "Choose your weapon:"
-		echo "A) Rock"
-		echo "B) Paper"
-		echo "C) Scissors"
-		echo "Press anything else to exit"
 		if [ "${WEAPON}" == "a" ]
 		then
 			WEAPON=${ROCK}
@@ -106,7 +169,19 @@ function play_game()
 			WEAPON=0
 			break
 		fi
-		COMPUTER_WEAPON=shuf -i 1-3 -n 1
+		COMP_W=$(shuf -i 1-3 -n 1)
+		if [ $((${WEAPON} + 1)) == ${COMP_W} ] || \
+			[ $((${WEAPON} - 2)) == ${COMP_W} ]
+		then
+			player_lost
+			break
+		elif [ ${WEAPON} == ${COMP_W} ]
+		then
+			player_tie
+		else
+			player_win
+		fi
+		print_game_menu
 	done
 }
 
@@ -119,17 +194,19 @@ do
 	if ! test -f "high_score";
 	then
 		touch high_score
+		echo 0 >> high_score
 	fi
 	if ! test -f "player";
 	then
 		touch player
 	fi
+	HIGH_SCORE=$(cat high_score)
+	PLAYER=$(cat player)
+	SCORE=0
 	echo ""
-	echo -ne "${PURPLE}High score: ${COL_OFF}"
-	cat high_score
-	echo -ne "${PURPLE}By: ${COL_OFF}"
-	cat player
-	echo -e "${COL_OFF}"
+	echo -ne "${PURPLE}High score: ${COL_OFF}${HIGH_SCORE}"
+	echo -ne "${PURPLE}	By: ${COL_OFF}${PLAYER}"
+	echo ""
 	echo -e "${WHITE}A)${COL_OFF} Start"
 	echo -e "${WHITE}B)${COL_OFF} Exit"
 	while read -rsn1 ANSWER
