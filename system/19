@@ -12,4 +12,4 @@
 # need to be of type "service" and their state has to be enabled.
 # By default systemctl lists only active, pending or failed units so lastly we
 # use the flag -all to make sure all the services are listed.
-sudo systemctl list-unit-files --type=servcice --state=enabled -all
+sudo systemctl list-unit-files --type=service --state=enabled -all
