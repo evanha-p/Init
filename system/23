@@ -10,6 +10,9 @@
 #
 # For graphic/console session you can now simply login by giving the new
 # username and the password.
+# For Gnome graphics version you connect as a new user by:
+# settings->details->users->unlock->press add user.
+# After that you can logout an login as a new user you just created.
 #
 # For the ssh login it depends if you have to setup ssh key authentication.
 # If you do, the steps are as follows. Note: these steps are done on the
