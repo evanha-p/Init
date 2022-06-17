@@ -10,6 +10,7 @@
 #
 # For graphic/console session you can now simply login by giving the new
 # username and the password.
+#
 # For Gnome graphics version you connect as a new user by:
 # settings->details->users->unlock->press add user.
 # After that you can logout an login as a new user you just created.
